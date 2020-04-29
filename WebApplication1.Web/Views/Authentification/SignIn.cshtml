@@ -1,0 +1,77 @@
+﻿@model WebApplication1.Web.Models.UserLogin
+@using System.Web.Optimization
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Sign In</h5>
+                    @Html.ValidationSummary(true)
+                    @using (Html.BeginForm("SignIn", "Authentification", FormMethod.Post, 
+                        new { @id = "loginForm", @class = "form-signin" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-label-group">
+                            <label for="inputEmail">Email address</label>
+                            @Html.TextBoxFor(m => m.Username, 
+                           new { type = "email", 
+                                 placeholder = "Email address", 
+                                 id = "inputEmail", 
+                                 name = "inputEmail", 
+                                 @class = "form-control" })
+                        </div>
+
+                        <div class="form-label-group">
+                            <label for="inputPassword">Password</label>
+                            @Html.TextBoxFor(m => m.Password, 
+                           new { type = "password", 
+                                 placeholder = "Password", 
+                                 id = "inputPassword", 
+                                 name = "inputPassword", 
+                                 @class = "form-control" })
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        </div>
+                        <button class="btn btn-lg btn-light btn-block text-uppercase" type="submit">Sign in</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/validation/js")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#loginForm").validate({
+                rules: {
+                    Username: {
+                        required: true
+                    },
+                    Password: {
+                        required: true
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                },
+                errorPlacement: function (error, element) {
+                    $(element)
+                        .closest("form")
+                        .find("label[for='" + element.attr("id") + "']")
+                        .append(error);
+                },
+                errorElement: "span"
+            });
+        });
+    </script>
+}

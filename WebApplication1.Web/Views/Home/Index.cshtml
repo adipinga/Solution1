@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication1.Domain.Entities.PostEntity>
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="container">
+        <div style="text-align:center" >
+            <br />
+            <div class="title-text" style="color:white;">
+                <p><b><i><h2>Welcome and fell like home with us!</h2></i></b></p>
+            </div>
+            <hr />
+            <div class="text2" style="color:white;">
+                <h4> A dog is the only thing on earth that loves you more than you love yourself. </h4>
+            </div>
+            <br />
+        </div>
+        @if (Model.Count() > 0)
+        {
+            <div class="row">
+                @foreach (var post in Model)
+                {
+                    <div class="col" style="text-align: center;">
+                        <h5 style="color:white;" ><em><i>@post.Title</i></em></h5>
+                        <img src="@post.ImageUrl" class="img-thumbnail" style="width:100%; max-width:300px">
+                        <a href="/Home/Detail/@post.PostId" class="btn btn-light mt-2" style="margin-left:auto; margin-right:auto; display:block;">Details</a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>

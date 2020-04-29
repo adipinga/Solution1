@@ -1,0 +1,23 @@
+.title-text {
+    font-family: 'Monotype Corsiva', !important;
+}
+
+.text1 {
+    font-family: 'Times New Roman';
+}
+
+.text2 {
+    font-family: 'Times New Roman';
+}
+body {
+    background: url('a1.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+.table td, .table th {
+    border-top-color: #dcd0cd;
+}
+.table thead th {
+    border: none;
+}

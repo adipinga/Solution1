@@ -1,0 +1,60 @@
+﻿@using System.Web.Optimization
+@using WebApplication1.Web.Extensions
+@{
+    var user = System.Web.HttpContext.Current.GetMySessionObject();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PuppyLeaks</title>
+    @Styles.Render("~/bundles/bootstrap/css")
+    @Styles.Render("~/bundles/style/css")
+</head>
+
+<body style="background-image: url('/Content/imgs/img1.png')" id="new">
+    <nav class="navbar navbar-expand navbar-light" style="background-color: #8C5FCF;">
+        <a>🐶 </a><a class="navbar-brand" href="/" style="font-style:italic; color: #FFFFFF;"> PuppyLeaks </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/" style="font-style:italic; color: #FFFFFF;"> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Top" style="font-style:italic; color: #FFFFFF;"> Top <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/About" style="font-style:italic; color: #FFFFFF;"> About dogs <span class="sr-only">(current)</span></a>
+                </li>
+                @if (user != null && user.Level.CompareTo(WebApplication1.Domain.Enums.URole.Administrator) == 0)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin" style="font-style:italic; color: #FFFFFF;">Admin Panel</a>
+                    </li>
+                }
+            </ul>
+
+            @if (user == null)
+            {
+                <a class="btn btn-light mr-3" href="/Authentification/SignIn">Sign in</a>
+                <a class="btn btn-light" href="/Authentification/SignUp">Sign up</a>
+            }
+            else
+            {
+                <a href="#" class="btn" style="color: white"> @user.Username</a>
+                <a href="/Authentification/Logout" class="btn" style="color: white">Logout</a>
+            }
+        </div>
+    </nav>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery/js")
+    @Scripts.Render("~/bundles/bootstrap/js")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication1.Domain.Entities.PostEntity>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container mt-3" align="center">
+    <h2 style="color:white;">Admin Page</h2>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th scope="col" style="color:white;">#</th>
+                <th scope="col" style="color:white;">Title</th>
+                <th scope="col" style="color:white;">Image</th>
+                <th scope="col" style="color:white;">Description</th>
+                <th scope="col" style="color:white;">Post Date</th>
+                <th scope="col" style="color:white;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                foreach (var post in Model)
+                {
+                    <tr>
+                        <th scope="row" style="color:white;">@post.PostId</th>
+                        <td style="color:white;">@post.Title</td>
+                        <td style="color:white;"><a href="@post.ImageUrl" target="_blank" style="color:white;">Access</a></td>
+                        <td style="color:white;">@post.PostContent</td>
+                        <td style="color:white;">@post.Date</td>
+                        <td>
+                            <a href="/Admin/Edit/@post.PostId" type="button" class="btn btn-primary">Edit</a>
+                            <a href="/Admin/Delete/@post.PostId" type="button" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <th colspan="6" style="color:white;">No entries found</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Admin/Add" type="button" class="btn btn-secondary btn-sm">Add Post</a>
+</div>
